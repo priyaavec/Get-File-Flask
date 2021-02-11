@@ -3,13 +3,14 @@ import requests
 
 app = Flask(__name__)
 
-
+#Display Home page to user to get url
 @app.route('/')
-def customer():
+def user():
     return render_template('geturl.html')
 
+#Download user specified URL
 @app.route('/', methods=['POST'])
-def my_form_post():
+def downloadfile():
     url = request.form['text']
     r = requests.get(url)
 
@@ -22,8 +23,8 @@ def my_form_post():
 
     with open(filename, 'wb') as f:
         f.write(r.content)
-    return "Successfully downloaded the file"
+    return "Successfully downloaded your file"
 
 if __name__ == '__main__':
-    app.run(port=5002,debug=True)
+    app.run(port=5003,debug=True)
 
